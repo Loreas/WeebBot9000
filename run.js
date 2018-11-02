@@ -1,13 +1,20 @@
+// requirements
 const config = require("./config.json");
 const Discord = require("discord.js");
 const fs = require("fs");
-
+// const
 const prefix = config.prefix;
 const bot = new Discord.Client();
+
+// bot members
 bot.config = config;
 bot.commands = new Discord.Collection();
 
-if (Number(process.version.slice(1).split(".")[0]) < 8) throw new Error("Node 8.0.0 or higher is required. Update Node on your system.");
+//bot members for comp commands
+bot.team = [];
+bot.creatingteam = false;
+bot.full = 0;
+bot.reserves = [];
 
 fs.readdir("./commands/", (err, files) => {
   if (err) console.error(err);
@@ -22,6 +29,8 @@ fs.readdir("./commands/", (err, files) => {
   jsfiles.forEach((f, i) =>{
     let props = require(`./commands/${f}`);
     bot.commands.set(f, props);
+    console.log(`Got command ${i + 1}`);
+    console.log(props);
 
   });
 });
@@ -45,9 +54,9 @@ bot.on("message", async message =>{
 
     if (!command.startsWith(prefix)) return;
 
-    let cmd = bot.commands.get(command.slice(prefix.length));
+    let cmd = bot.commands.get(command.slice(prefix.length)+".js");
     console.log(command.slice(prefix.length));
-    if(cmd != null){ 
+    if(cmd != undefined){ 
         console.log("do i get here?")
         cmd.run(bot, message, args)
     };
