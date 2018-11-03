@@ -41,7 +41,7 @@ bot.on("ready", () =>{
 })
 
 bot.on("message", async message =>{
-    console.log("i got the message!")
+    
     if(message.author.bot) return;
     if(message.channel.type === "dm") return;
 
@@ -57,10 +57,10 @@ bot.on("message", async message =>{
     let cmd = bot.commands.get(command.slice(prefix.length)+".js");
     console.log(command.slice(prefix.length));
     if(cmd != undefined){ 
-        console.log("do i get here?")
+       
         cmd.run(bot, message, args)
     };
-    console.log("did i do it?")
+  
 })
 
 bot.login(config.token);

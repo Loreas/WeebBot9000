@@ -2,7 +2,7 @@ const Discord = module.require("discord.js");
 const fs = module.require("fs");
 
 module.exports.run = async (bot, message, args) => {
-	let user = message.author.username;
+	let user = message.member.displayName;
 	if(bot.creatingteam){
 		message.channel.send(`there is already a team started`);
 		return;

@@ -1,0 +1,5 @@
+TO DO:
+	*adding message sending at certain point in time
+	*!supersayan command playing audio
+	*playing audio
+	*
